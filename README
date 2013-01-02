@@ -1,0 +1,5 @@
+Contained here are my solutions and work as I read through `The C
+Programming Language', 2nd ed. by Brian W. Kernighan and Dennis
+M. Ritchie.  I'll try to indicate which exercises correspond to a
+given source file in the comments, and source files will be organized
+by chapter directories.
