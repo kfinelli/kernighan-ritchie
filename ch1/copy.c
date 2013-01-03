@@ -1,7 +1,7 @@
 #include "stdio.h"
 
 /* copy input to output, replace multiple blanks with single blank */
-/* ex 1-8 */
+/* ex 1-9 */
 
 main() {
   int c; 
