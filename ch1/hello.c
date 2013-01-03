@@ -4,5 +4,6 @@
 /* exercise 1.1, 1.2 */
 
 main() {
-  printf("hello world\n");
+  printf("hello \t \c w\borld\n");
+  printf("hi \t world\n");
 }
