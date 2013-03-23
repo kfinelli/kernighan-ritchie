@@ -6,7 +6,7 @@ int getline(char line[], int maxline);
 void copy(char to[], char from[]);
 
 /*exercise 1.17*/
-/*print lines longer than 80 characters*/
+/*print lines longer than CUTLEN, 80 characters by default*/
 main() {
   int len;     /*store length for extra-long lines*/
   int thislen; /*current line length*/
