@@ -2,7 +2,7 @@
 
 /* print Fahrenheit-Celsius table
    for fahr = 0, 20, ..., 300; floating-point version */
-/* ex. 1-3 */
+/* ex. 1-16 */
 
 float fahr_to_cel(float);
 
