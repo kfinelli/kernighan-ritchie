@@ -39,7 +39,7 @@ main() {
     len = 0;
     longLine = 0;
   }
-  if (max > 0) /*there as a line*/
+  if (max > 0) /*there was a line*/
     printf("Length: %i\n", max);
     printf("%s\n", longest);
   return 0;
