@@ -2,8 +2,11 @@
 #define MAXLINE 1000 /*max input line size*/
 #define CUTLEN 80 /*minimum length to print lines*/
 
-int getline(char line[], int maxline);
-int isblank(char check[]);
+int getline_stdin(char line[], int maxline); /*note, these function
+					       names had to be changed
+					       to comile on my
+					       laptop*/
+int isblankline(char check[]);
 void copynoblank(char to[], char from[]);
 
 /*exercise 1.18*/
@@ -11,24 +14,26 @@ void copynoblank(char to[], char from[]);
   input, and to delete entirely blank lines*/
 main() {
   int len;     /*store length for extra-long lines*/
-  int longline;
+  int longLine;
   char line[MAXLINE]; /*current input line*/
+  char noBlankLine[MAXLINE];
   len = 0;
   longLine = 0;
 
-  while ((len = getline(line, MAXLINE)) > 0) {
-    if (len == MAXLINE-1) { /*limited by maxline size */
-      copynoblank(longline, line); /*only copy the first part of long
-				lines*/
-      }
-      continue;
-    }
-  if (!isblank(line)) {
+  while ((len = getline_stdin(line, MAXLINE)) > 0) {
+    /* if (len == MAXLINE-1) { /\*limited by maxline size *\/ */
+    /*   copynoblank(longline, line); /\*only copy the first part of long */
+    /* 				lines*\/ */
+    /*   } */
+    /*   continue; */
+    /* } */
+  if (!isblankline(line)) {
     if (!longLine) /*only copy the first part of long lines*/
-      printf("%s", line);
-    else
-      printf("%s\n", longline);
-    
+      copynoblank(noBlankLine,line);
+      printf("%s", noBlankLine);
+    /* else */
+    /*   printf("%s\n", longLine); */
+  } 
   }
   len = 0;
 
@@ -36,7 +41,7 @@ main() {
 }
 
 /*getline: read a lone into s, return length */
-int getline(char s[], int lim) {
+int getline_stdin(char s[], int lim) {
   int c, i;
   for (i=0; i<lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
     s[i] = c;
@@ -48,28 +53,36 @@ int getline(char s[], int lim) {
   return i;
 }
 
-/*isblank: return 1 if the newline-terminated character array is not
-  entirely blank*/
-int isblank(char check[]) {
+/*isblankLine: return 1 if the string is entirely blank*/
+int isblankline(char check[]) {
   int i = 0;
-  if (check[i]=='\n') return 1;
 
-  while(check[i]!='\n') {
-    if (check[i]==' ' || check[i]=='\t') return 1;
+  while(check[i]!='\0') {
+    if (check[i] != '\n' && check[i]!=' ' && check[i]!='\t') return 0;
     i++;
   }
-  return 0;
+  return 1;
 }
 
 /*copynoblank: copy `from' into `to'; assume to is big enough.  Remove
   trailing blanks */
 void copynoblank(char to[], char from[]) {
-  int i;
-
-  i = 0;
-  while(from[i] != '\0') {
-    if (from[i] != ' ' && from[i] != '\t' )
-      to[i] = from[i];
+  int i, iFirstBlank;
+  int isBlank;
+  i = 0; iFirstBlank = MAXLINE;
+  isBlank = 0;
+  while((to[i] = from[i]) != '\0') {
+    if (from[i]==' ' || from[i]=='\t') {
+      if (!isBlank)
+	iFirstBlank = i;
+      isBlank = 1;
+    } else if (isBlank && from[i]!='\n') {
+      isBlank = 0;
+    }
     ++i;
+  }
+  if (isBlank) {
+    to[iFirstBlank] = '\n';
+    to[++iFirstBlank] = '\0';
   }
 }
