@@ -14,28 +14,28 @@ main() {
   char line[MAXLINE]; /*current input line*/
   char longline[MAXLINE]; /*temprorarily store first part of a long
 			    line in case it passes the cut*/
-  char longLine = 0; /*program state - are we splitting a long line to
+  char isLongLine = 0; /*program state - are we splitting a long line to
 		       copy it?*/
   max = 0, len = 0;
   while ((thislen = getline(line, MAXLINE)) > 0) {
     len += thislen;
     if (thislen == MAXLINE-1) { /*limited by maxline size */
-      if (!longLine) {
-	longLine = 1;
+      if (!isLongLine) {
+	isLongLine = 1;
 	copy(longline, line); /*only copy the first part of long
 				lines*/
       }
       continue;
     }
     if (len > CUTLEN) {
-      if (!longLine) /*only copy the first part of long lines*/
+      if (!isLongLine) /*only copy the first part of long lines*/
 	printf("%s", line);
       else
 	printf("%s\n", longline);
 
     }
     len = 0;
-    longLine = 0;
+    isLongLine = 0;
   }
   return 0;
 }
