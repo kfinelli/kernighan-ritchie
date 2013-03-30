@@ -1,5 +1,4 @@
 #include <stdio.h>
-#define MAXLINE 1000 /*max input line size*/
 
 /*exercise 1.23*/
 /*Write a program to remove comments from a c program.  */
