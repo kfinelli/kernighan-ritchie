@@ -11,32 +11,18 @@ void copynoblank(char to[], char from[]);
 
 /*exercise 1.18*/
 /*Write a program to remove trailing blanks and tabs from each line of
-  input, and to delete entirely blank lines*/
+  input, and to delete entirely blank lines.  Doesn't really handle
+  extra-long lines very well*/
 main() {
-  int len;     /*store length for extra-long lines*/
-  int longLine;
   char line[MAXLINE]; /*current input line*/
   char noBlankLine[MAXLINE];
-  len = 0;
-  longLine = 0;
 
-  while ((len = getline_stdin(line, MAXLINE)) > 0) {
-    /* if (len == MAXLINE-1) { /\*limited by maxline size *\/ */
-    /*   copynoblank(longline, line); /\*only copy the first part of long */
-    /* 				lines*\/ */
-    /*   } */
-    /*   continue; */
-    /* } */
-  if (!isblankline(line)) {
-    if (!longLine) /*only copy the first part of long lines*/
+  while (getline_stdin(line, MAXLINE) > 0) {
+    if (!isblankline(line)) {
       copynoblank(noBlankLine,line);
-      printf("%s", noBlankLine);
-    /* else */
-    /*   printf("%s\n", longLine); */
-  } 
+    }
+    printf("%s", noBlankLine);
   }
-  len = 0;
-
   return 0;
 }
 
